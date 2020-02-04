@@ -11,6 +11,7 @@ Order is a reserved keyword for H2DB, then the table name is different of the en
 @Entity(name = "REQUEST_DETAILS")
 @NoArgsConstructor
 @Getter
+@ToString(exclude = "order")
 @Data
 public class OrderDetails {
     @Id
