@@ -1,4 +1,4 @@
-package com.salv.orders.entities;
+package com.salv.orders.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

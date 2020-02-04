@@ -1,16 +1,14 @@
-package com.salv.orders.entities;
+package com.salv.orders.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 //TODO: create tax rate, quantity in the stock
@@ -24,4 +22,9 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
+    public Product(Long id, String description, BigDecimal price) {
+        this.id = id;
+        this.description = description;
+        this.price = price;
+    }
 }
