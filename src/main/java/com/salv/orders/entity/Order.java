@@ -20,6 +20,7 @@ Order is a reserved keyword for H2DB, then the table name is different of the en
 @Getter
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -38,8 +39,7 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<OrderDetails> orderDetails;
 
-    public Order(Long id, Client client, String description, BigDecimal totalValue, OrderDetails ... orderDetails) {
-        this.id = id;
+    public Order(Client client, String description, BigDecimal totalValue, OrderDetails ... orderDetails) {
         this.client = client;
         this.description = description;
         this.totalValue = totalValue;

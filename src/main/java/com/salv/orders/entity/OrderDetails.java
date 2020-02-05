@@ -15,7 +15,7 @@ Order is a reserved keyword for H2DB, then the table name is different of the en
 @Data
 public class OrderDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -32,8 +32,7 @@ public class OrderDetails {
     @Column(nullable = false)
     private BigDecimal value;
 
-    public OrderDetails(@NonNull Long id, @NonNull Product product, int quantity, @NonNull BigDecimal value) {
-        this.id = id;
+    public OrderDetails(@NonNull Product product, int quantity, @NonNull BigDecimal value) {
         this.product = product;
         this.quantity = quantity;
         this.value = value;

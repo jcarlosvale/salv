@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -65,18 +66,17 @@ public class RepositoryTest {
         Product product2 = new Product(2L, "some product 2", BigDecimal.ONE);
         productRepository.save(product2);
 
-        OrderDetails orderDetails1 = new OrderDetails(1L, product1, 10, BigDecimal.ONE);
-        OrderDetails orderDetails2 = new OrderDetails(2L, product2, 15, BigDecimal.ONE);
-        Order order = new Order(1L, client, "some order", BigDecimal.ONE, orderDetails1, orderDetails2);
+        OrderDetails orderDetails1 = new OrderDetails(product1, 10, BigDecimal.ONE);
+        OrderDetails orderDetails2 = new OrderDetails(product2, 15, BigDecimal.ONE);
+        Order order = new Order(client, "some order", BigDecimal.ONE, orderDetails1, orderDetails2);
 
         orderRepository.save(order);
 
-        assertEquals(1, orderRepository.findAll().size());
+        List<Order> listOfOrder = orderRepository.findAll();
+        assertEquals(1, listOfOrder.size());
 
-        Order actualOrder = orderRepository.getOne(1L);
+        Order actualOrder = listOfOrder.get(0);
         assertEquals(order,actualOrder);
         assertEquals(2, actualOrder.getOrderDetails().size());
-        assertTrue(actualOrder.getOrderDetails().contains(orderDetails1));
-        assertTrue(actualOrder.getOrderDetails().contains(orderDetails2));
     }
 }
