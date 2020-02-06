@@ -1,7 +1,9 @@
 package com.salv.orders.dto;
 
 import com.salv.orders.entity.Order;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,13 +11,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 public class OrderDto {
 
-    private final Long id;
-    private final String description;
-    private final LocalDate date;
-    private final BigDecimal totalValue;
-    private final ClientDto client;
+    private Long id;
+    private String description;
+    private LocalDate date;
+    private BigDecimal totalValue;
+    private ClientDto client;
     private Set<OrderDetailsDto> orderDetails;
 
     public OrderDto(Order order) {
