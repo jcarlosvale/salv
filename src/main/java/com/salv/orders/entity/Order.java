@@ -1,5 +1,6 @@
 package com.salv.orders.entity;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,7 +19,7 @@ Order is a reserved keyword for H2DB, then the table name is different of the en
 @Entity(name = "REQUEST")
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "orderDetails")
-@Getter
+@Data
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +38,7 @@ public class Order {
     @JoinColumn
     private Client client;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<OrderDetails> orderDetails;
 
     public Order(Client client, String description, BigDecimal totalValue, OrderDetails ... orderDetails) {

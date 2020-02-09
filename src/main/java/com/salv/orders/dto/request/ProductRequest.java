@@ -1,11 +1,15 @@
 package com.salv.orders.dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductRequest {
 
-    private final Long id;
-    private final Integer quantity;
+    private Long id;
+    private Integer quantity;
 
 }

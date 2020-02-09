@@ -39,7 +39,6 @@ public class OrderService {
     public OrderDto createOrder(OrderRequest orderRequest) throws CustomException {
         if (null == orderRequest) throw new CustomException("Order request is null.");
         Client client = retrieveClientFromId(orderRequest.getClientId());
-
         Set<OrderDetails> orderDetails = new HashSet<>();
         double total = 0.0;
         for (ProductRequest productRequest : orderRequest.getProducts()) {
@@ -47,13 +46,9 @@ public class OrderService {
             total += details.getValue().doubleValue();
             orderDetails.add(details);
         }
-
         BigDecimal totalValue = BigDecimal.valueOf(total).setScale(2, RoundingMode.DOWN);
-
         Order order = new Order(client, orderRequest.getDescription(), totalValue, orderDetails.toArray(new OrderDetails[0]));
-
         order = orderRepository.save(order);
-
         return new OrderDto(order);
     }
 
@@ -66,11 +61,13 @@ public class OrderService {
         return new OrderDetails(product, quantity, value);
     }
 
-    private Product retrieveProduct(Long productId) {
+    private Product retrieveProduct(Long productId) throws CustomException {
+        if (null == productId) throw new CustomException("Product ID is empty or null.");
         return productRepository.getOne(productId);
     }
 
-    private Client retrieveClientFromId(Long clientId) {
+    private Client retrieveClientFromId(Long clientId) throws CustomException {
+        if (null == clientId) throw new CustomException("Client is empty or null.");
         return clientRepository.getOne(clientId);
     }
 

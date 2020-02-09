@@ -1,14 +1,16 @@
 package com.salv.orders.dto.request;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 public class OrderRequest {
 
-    private final String description;
-    private final Long clientId;
-    private final Set<ProductRequest> products;
+    private String description;
+    private Long clientId;
+    private Set<ProductRequest> products;
 
 }
