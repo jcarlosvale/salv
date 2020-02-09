@@ -31,10 +31,20 @@ public class OrderService {
     private final ClientRepository clientRepository;
     private final ProductRepository productRepository;
 
+    /**
+     * Method to return the orders from database
+     * @return All orders
+     */
     public OrdersResponse getOrders() {
         return convertToOrdersResponse(orderRepository.findAll());
     }
 
+    /**
+     * Method used to insert a new Order, containing the validations calls
+     * @param orderRequest order to insert
+     * @return the created order
+     * @throws CustomException in case of validation error
+     */
     @Transactional
     public OrderDto createOrder(OrderRequest orderRequest) throws CustomException {
         if (null == orderRequest) throw new CustomException("Order request is null.");
